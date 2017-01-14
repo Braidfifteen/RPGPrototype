@@ -3,7 +3,7 @@
 public class PlayerMovement : MonoBehaviour, IMove
 {
     private Rigidbody2D rb;
-    private float speed = 10f;
+    private float speed = 2f;
 
     void Start()
     {
