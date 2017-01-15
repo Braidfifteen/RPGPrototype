@@ -4,7 +4,7 @@ public class CameraFollowPlayer : MonoBehaviour
 {
     public GameObject player;
     private float mapWidth = 16.0f;
-    private float maxX = 14.3f;
+    private float maxX = 14.4f;
     private float minX = 1.6f;
     private float maxY = -1.2f;
     private float minY = -14.8f;
