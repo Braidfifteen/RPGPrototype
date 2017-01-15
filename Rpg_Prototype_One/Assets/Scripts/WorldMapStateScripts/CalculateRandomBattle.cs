@@ -9,6 +9,9 @@ public class CalculateRandomBattle : MonoBehaviour
     // For now I'm just going to randomly pick a number and if it matches battleNumber
     // it will start a battle
     private int battleNumber = 10;
+    private int randNum = 500;
+    private float timeBetweenBattles = 3.0f;
+    private float battleTimer = 0.0f;
 
     public CalculateRandomBattle(PlayerMovement playerMovement)
     {
@@ -17,9 +20,17 @@ public class CalculateRandomBattle : MonoBehaviour
 
     public bool calculateIfRandomBattle()
     {
-        int rand = Random.Range(0, 100);
-        //print(rand);
-        print(playerMovement.IsMoving);
-        return (playerMovement.IsMoving && rand == battleNumber);
+        if((timeForBattle() && Random.Range(0, randNum) == battleNumber &&                  playerMovement.IsMoving))
+        {
+            battleTimer = 0.0f;
+            return true;
+        }
+        return false;
+    }
+
+    private bool timeForBattle()
+    {
+        battleTimer += Time.deltaTime;
+        return (battleTimer > timeBetweenBattles);
     }
 }
