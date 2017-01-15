@@ -28,10 +28,16 @@ public class WorldMapState : MonoBehaviour, IState
     public void OnEnter()
     {
         print("World Map State Enter");
+        if (!transform.gameObject.activeInHierarchy)
+        {
+            transform.gameObject.SetActive(true);
+        }
+
         for (int i = 0; i < enterObjects.Length; i++)
         {
             enterObjects[i].OnEnter();
         }
+
     }
 
     public void OnExit()
@@ -40,6 +46,10 @@ public class WorldMapState : MonoBehaviour, IState
         for (int i = 0; i < exitObjects.Length; i++)
         {
             exitObjects[i].OnExit();
+        }
+        if (transform.gameObject.activeInHierarchy)
+        {
+            transform.gameObject.SetActive(false);
         }
     }
 
@@ -53,6 +63,11 @@ public class WorldMapState : MonoBehaviour, IState
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             gameStateManager.ChangeState("Empty State (EmptyState)");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            gameStateManager.ChangeState("Battle State (BattleState)");
         }
     }
 }
