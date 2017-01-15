@@ -14,9 +14,4 @@ public class PlayerInput : MonoBehaviour, IInput
 
         objectMoved.Move(moveVert, moveHorz);
     }
-
-    public void Update()
-    {
-        GetInput();
-    }
 }

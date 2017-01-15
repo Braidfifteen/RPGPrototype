@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour, IMove
+public class PlayerMovement : MonoBehaviour, IMove, IUpdatable
 {
     private Rigidbody2D rb;
     private float speed = 2f;
+    private Vector2 moveVector;
 
     void Start()
     {
@@ -12,6 +13,11 @@ public class PlayerMovement : MonoBehaviour, IMove
 
     public void Move(float vert, float horz)
     {
-        rb.velocity = new Vector2(horz * speed, vert * speed);
+        moveVector = new Vector2(horz * speed, vert * speed);
+    }
+
+    public void OnUpdate()
+    {
+        rb.velocity = moveVector;
     }
 }
