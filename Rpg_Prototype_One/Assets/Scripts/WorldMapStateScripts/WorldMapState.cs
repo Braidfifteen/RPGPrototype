@@ -9,20 +9,26 @@ public class WorldMapState : MonoBehaviour, IState
     private IExitable[] exitObjects;
     private IEnterable[] enterObjects;
 
+    private CalculateRandomBattle randomBattle;
+
     private void Start()
     {
         inputObjects = GetComponentsInChildren<IInput>();
         updateObjects = GetComponentsInChildren<IUpdatable>();
         exitObjects = GetComponentsInChildren<IExitable>();
         enterObjects = GetComponentsInChildren<IEnterable>();
+        randomBattle = new CalculateRandomBattle(GetComponentInChildren<PlayerMovement>());
     }
 
     public void OnUpdate()
     {
-        for (int i = 0; i < updateObjects.Length; i++)
-        {
-            updateObjects[i].OnUpdate();
-        }
+        if (randomBattle.calculateIfRandomBattle())
+            changeToBattleScreen();
+        else
+            for (int i = 0; i < updateObjects.Length; i++)
+            {
+                updateObjects[i].OnUpdate();
+            }
     }
 
     public void OnEnter()
@@ -67,7 +73,12 @@ public class WorldMapState : MonoBehaviour, IState
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            gameStateManager.ChangeState("Battle State (BattleState)");
+            changeToBattleScreen();
         }
+    }
+
+    private void changeToBattleScreen()
+    {
+        gameStateManager.ChangeState("Battle State (BattleState)");
     }
 }

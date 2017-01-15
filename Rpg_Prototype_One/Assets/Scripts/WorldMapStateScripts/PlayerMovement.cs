@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour, IMove, IUpdatable, IExitable, IEnte
     private Vector2 moveVector;
     private bool canMove = true;
     private Vector3 lastPos;
-    
+    private bool isMoving;
+
+    public bool IsMoving { get { return isMoving; } }
 
     void Start()
     {
@@ -23,10 +25,12 @@ public class PlayerMovement : MonoBehaviour, IMove, IUpdatable, IExitable, IEnte
     public void OnUpdate()
     {
         rb.velocity = moveVector;
+        isMoving = (rb.velocity != Vector2.zero);
     }
 
     public void OnExit()
     {
+        isMoving = false;
         canMove = false;
         rb.velocity = Vector2.zero;
         lastPos = rb.transform.position;
