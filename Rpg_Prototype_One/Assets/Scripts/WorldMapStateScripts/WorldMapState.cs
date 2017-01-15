@@ -33,7 +33,6 @@ public class WorldMapState : MonoBehaviour, IState
 
     public void OnEnter()
     {
-        print("World Map State Enter");
         if (!transform.gameObject.activeInHierarchy)
         {
             transform.gameObject.SetActive(true);
@@ -48,7 +47,6 @@ public class WorldMapState : MonoBehaviour, IState
 
     public void OnExit()
     {
-        print("World Map State Exit.");
         for (int i = 0; i < exitObjects.Length; i++)
         {
             exitObjects[i].OnExit();
