@@ -17,7 +17,6 @@ public class StateMachine : MonoBehaviour
                 IState state = objectsWithState[i].GetComponent<IState>();
                 string type = state.ToString();
                 stateDict.Add(type, state);
-                currentState = state;
 
             }
             catch (NullReferenceException)
@@ -26,11 +25,20 @@ public class StateMachine : MonoBehaviour
             }
         }
 
+        currentState = stateDict["World Map State (WorldMapState)"];
+
     }
 
     private void Update()
     {
          currentState.HandleInput();
          currentState.OnUpdate();
+    }
+
+    public void ChangeState(string stateID)
+    {
+        currentState.OnExit();
+        currentState = stateDict[stateID];
+        currentState.OnEnter();
     }
 }

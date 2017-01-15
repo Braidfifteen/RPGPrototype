@@ -2,9 +2,11 @@
 
 public class EmptyState : MonoBehaviour, IState
 {
-   public void OnUpdate()
+    public StateMachine gameStateManager;
+
+    public void OnUpdate()
     {
-        print("EmptyStateUpdate");
+
     }
     public void OnEnter()
     {
@@ -14,8 +16,12 @@ public class EmptyState : MonoBehaviour, IState
     {
         print("Empty State Exit");
     }
+
     public void HandleInput()
     {
-        print("Empty state input");
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameStateManager.ChangeState("World Map State (WorldMapState)");
+        }
     }
 }
