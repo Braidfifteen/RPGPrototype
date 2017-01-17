@@ -6,10 +6,11 @@ public class MoveSelectorArrow : MonoBehaviour, ILateEnter, IExitable
 {
     public GameObject[] FriendlySpots;
     public GameObject[] EnemySpots;
-    public GameObject SelectorArrow;
 
     public List<GameObject> activeSpots = new List<GameObject>();
-    public int arrowIndex;
+
+    private int arrowIndex;
+    private int previousIndex;
 
 
 
@@ -31,21 +32,12 @@ public class MoveSelectorArrow : MonoBehaviour, ILateEnter, IExitable
                 activeSpots.Add(EnemySpots[i]);
             }
         }
-        setArrow(activeSpots[arrowIndex].GetComponent<CoordsForSelectorArrow>().GetCoordinates());
-
-        SelectorArrow.SetActive(true);
+        activateSpot();
     }
 
     public void OnExit()
     {
         activeSpots.Clear();
-        SelectorArrow.SetActive(false);
-    }
-
-    private void setArrow(Vector3 pos)
-    {
-        SelectorArrow.transform.position = pos;
-        SelectorArrow.transform.rotation = Quaternion.identity;
     }
 
     // 1 is down. -1 is up.
@@ -55,13 +47,13 @@ public class MoveSelectorArrow : MonoBehaviour, ILateEnter, IExitable
         {
             arrowIndex -= 1;
             handleArgumentOutOfRangeException();
-            setArrow(activeSpots[arrowIndex].GetComponent<CoordsForSelectorArrow>().GetCoordinates());
+            activateSpot();
         }
         else
         {
             arrowIndex += 1;
             handleArgumentOutOfRangeException();
-            setArrow(activeSpots[arrowIndex].GetComponent<CoordsForSelectorArrow>().GetCoordinates());
+            activateSpot();
         }
     }
 
@@ -71,6 +63,19 @@ public class MoveSelectorArrow : MonoBehaviour, ILateEnter, IExitable
             arrowIndex = 0;
         else if (arrowIndex < 0)
             arrowIndex = activeSpots.Count - 1;
+    }
 
+    private void activateSpot()
+    {
+        try
+        {
+            activeSpots[previousIndex].GetComponent<ActivateSpot>().Deactivate();
+        }
+        catch(ArgumentOutOfRangeException)
+        {
+        }
+        activeSpots[arrowIndex].GetComponent<ActivateSpot>().Activate();
+
+        previousIndex = arrowIndex;
     }
 }
