@@ -4,6 +4,7 @@ public class CharacterSpot : MonoBehaviour
 {
     public CharacterInfo characterInfo;
     public SpriteRenderer spriteRenderer;
+    public bool IsSelected = false;
 
     private bool isEmpty = true;
 
@@ -17,7 +18,7 @@ public class CharacterSpot : MonoBehaviour
 
     public void Reset()
     {
-        transform.gameObject.GetComponent<SpriteRenderer>().sprite = null;
+        spriteRenderer.sprite = null;
         characterInfo = null;
         isEmpty = true;
         transform.gameObject.SetActive(false);

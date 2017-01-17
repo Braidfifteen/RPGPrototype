@@ -8,6 +8,7 @@ public class BattleState : MonoBehaviour, IState
     private IInput[] inputObjects;
     private IExitable[] exitObjects;
     private IEnterable[] enterObjects;
+    private ILateEnter[] lateEnterObjects;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class BattleState : MonoBehaviour, IState
         updateObjects = GetComponentsInChildren<IUpdatable>();
         exitObjects = GetComponentsInChildren<IExitable>();
         enterObjects = GetComponentsInChildren<IEnterable>();
+        lateEnterObjects = GetComponentsInChildren<ILateEnter>();
     }
 
     public void OnUpdate()
@@ -35,6 +37,11 @@ public class BattleState : MonoBehaviour, IState
         for (int i = 0; i < enterObjects.Length; i++)
         {
             enterObjects[i].OnEnter();
+        }
+
+        for (int i = 0; i < lateEnterObjects.Length; i++)
+        {
+            lateEnterObjects[i].OnLateEnter();
         }
     }
 
