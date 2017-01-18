@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System;
 
-public class MoveSelectorArrow : MonoBehaviour, ILateEnter, IExitable
+public class SelectorArrowControl : MonoBehaviour, ILateEnter, IExitable, ISelectable
 {
     public GameObject[] FriendlySpots;
     public GameObject[] EnemySpots;
 
     public List<GameObject> activeSpots = new List<GameObject>();
 
-    private int arrowIndex;
+    private int currentIndex;
     private int previousIndex;
 
 
 
     public void OnLateEnter()
     {
-        arrowIndex = 0;
+        currentIndex = 0;
         for (int i = 0; i < FriendlySpots.Length; i++)
         {
             if (FriendlySpots[i].activeInHierarchy)
@@ -45,24 +45,29 @@ public class MoveSelectorArrow : MonoBehaviour, ILateEnter, IExitable
     {
         if (direction == 1)
         {
-            arrowIndex -= 1;
+            currentIndex -= 1;
             handleArgumentOutOfRangeException();
             activateSpot();
         }
         else
         {
-            arrowIndex += 1;
+            currentIndex += 1;
             handleArgumentOutOfRangeException();
             activateSpot();
         }
     }
 
+    public void OnSelect()
+    {
+        activeSpots[currentIndex].GetComponent<CharacterSpot>().OnSelect();
+    }
+
     private void handleArgumentOutOfRangeException()
     {
-        if (arrowIndex >= activeSpots.Count)
-            arrowIndex = 0;
-        else if (arrowIndex < 0)
-            arrowIndex = activeSpots.Count - 1;
+        if (currentIndex >= activeSpots.Count)
+            currentIndex = 0;
+        else if (currentIndex < 0)
+            currentIndex = activeSpots.Count - 1;
     }
 
     private void activateSpot()
@@ -74,8 +79,8 @@ public class MoveSelectorArrow : MonoBehaviour, ILateEnter, IExitable
         catch(ArgumentOutOfRangeException)
         {
         }
-        activeSpots[arrowIndex].GetComponent<ActivateSpot>().Activate();
+        activeSpots[currentIndex].GetComponent<ActivateSpot>().Activate();
 
-        previousIndex = arrowIndex;
+        previousIndex = currentIndex;
     }
 }

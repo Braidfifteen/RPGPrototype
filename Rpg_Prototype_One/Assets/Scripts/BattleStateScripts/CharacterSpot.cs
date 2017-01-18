@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class CharacterSpot : MonoBehaviour
+public class CharacterSpot : MonoBehaviour, ISelectable
 {
     public CharacterInfo characterInfo;
     public SpriteRenderer spriteRenderer;
-    public bool IsSelected = false;
 
+    private bool isSelected = false;
     private bool isEmpty = true;
 
 
@@ -29,5 +29,11 @@ public class CharacterSpot : MonoBehaviour
         spriteRenderer.sprite = s;
         characterInfo = info;
         transform.gameObject.SetActive(true);
+    }
+
+    public void OnSelect()
+    {
+        isSelected = true;
+        print(characterInfo.GetName());
     }
 }
