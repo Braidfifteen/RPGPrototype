@@ -25,7 +25,8 @@ public class StateMachine : MonoBehaviour
             }
         }
 
-        currentState = stateDict["World Map State (WorldMapState)"];
+        currentState = stateDict[objectsWithState[0].GetComponent<IState>().ToString()];
+
 
     }
 
@@ -39,6 +40,13 @@ public class StateMachine : MonoBehaviour
     {
         currentState.OnExit();
         currentState = stateDict[stateID];
+        currentState.OnEnter();
+    }
+
+    public void ChangeState(int indexID)
+    {
+        currentState.OnExit();
+        currentState = stateDict[objectsWithState[indexID].GetComponent<IState>().ToString()];
         currentState.OnEnter();
     }
 }

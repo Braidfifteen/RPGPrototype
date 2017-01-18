@@ -77,6 +77,6 @@ public class WorldMapState : MonoBehaviour, IState
 
     private void changeToBattleScreen()
     {
-        gameStateManager.ChangeState("Battle State (BattleState)");
+        gameStateManager.ChangeState(1);
     }
 }
