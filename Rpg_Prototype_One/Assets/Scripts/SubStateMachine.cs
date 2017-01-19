@@ -33,6 +33,7 @@ public class SubStateMachine : MonoBehaviour, IState
         }
 
         currentState = stateDict[objectsWithState[0].GetComponent<IState>().ToString()];
+
     }
 
     public void OnUpdate()
@@ -42,6 +43,7 @@ public class SubStateMachine : MonoBehaviour, IState
 
     public void OnEnter()
     {
+
         if (!transform.gameObject.activeInHierarchy)
             transform.gameObject.SetActive(true);
         currentState.OnEnter();
@@ -51,6 +53,8 @@ public class SubStateMachine : MonoBehaviour, IState
     {
         if (transform.gameObject.activeInHierarchy)
             transform.gameObject.SetActive(false);
+
+        currentState = stateDict[objectsWithState[0].GetComponent<IState>().ToString()];
     }
 
     public void HandleInput()
@@ -70,5 +74,11 @@ public class SubStateMachine : MonoBehaviour, IState
         currentState.OnExit();
         currentState = stateDict[objectsWithState[indexID].GetComponent<IState>().ToString()];
         currentState.OnEnter();
+    }
+
+    public void ChangeGameState(int indexID)
+    {
+        currentState.OnExit();
+        gameStateManager.ChangeState(0);
     }
 }
