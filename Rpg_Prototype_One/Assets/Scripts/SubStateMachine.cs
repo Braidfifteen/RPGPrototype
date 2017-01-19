@@ -16,7 +16,7 @@ public class SubStateMachine : MonoBehaviour, IState
     private IState currentState;
 
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < objectsWithState.Length; i++)
         {
@@ -33,7 +33,6 @@ public class SubStateMachine : MonoBehaviour, IState
         }
 
         currentState = stateDict[objectsWithState[0].GetComponent<IState>().ToString()];
-        print(currentState);
     }
 
     public void OnUpdate()

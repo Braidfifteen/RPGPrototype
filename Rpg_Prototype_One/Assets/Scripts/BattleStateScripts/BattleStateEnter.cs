@@ -9,7 +9,7 @@ public class BattleStateEnter : MonoBehaviour, IState
 
     public void OnUpdate()
     {
-        print("Battle State Enter");
+
         counter += Time.deltaTime;
         if (counter >= stateDuration)
             battleStateManager.ChangeState(1);
@@ -17,12 +17,13 @@ public class BattleStateEnter : MonoBehaviour, IState
 
     public void OnEnter()
     {
+        print("BattleStateEnter OnEnter()");
         counter = 0.0f;
     }
 
     public void OnExit()
     {
-
+        print("BattleStateEnter OnExit()");
     }
 
     public void HandleInput()
