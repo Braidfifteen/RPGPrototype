@@ -3,6 +3,7 @@
 public class BattleStateEnter : MonoBehaviour, IState
 {
     public SubStateMachine battleStateManager;
+    public CharactersInBattleState characters;
 
     private float counter = 0.0f;
     private float stateDuration = 3.0f;
@@ -18,6 +19,7 @@ public class BattleStateEnter : MonoBehaviour, IState
     public void OnEnter()
     {
         print("BattleStateEnter OnEnter()");
+        characters.SetupEnemySpots();
         counter = 0.0f;
     }
 

@@ -10,7 +10,7 @@ public class BattleStateInput : MonoBehaviour, IInput
             arrow.MoveArrow(1);
         if (Input.GetKeyDown(KeyCode.DownArrow))
             arrow.MoveArrow(-1);
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Return))
             arrow.OnSelect();
 
         

@@ -36,4 +36,9 @@ public class CharacterSpot : MonoBehaviour, ISelectable
         isSelected = true;
         print(characterInfo.GetName());
     }
+
+    public CharacterInfo GetCharacterInfo()
+    {
+        return characterInfo;
+    }
 }

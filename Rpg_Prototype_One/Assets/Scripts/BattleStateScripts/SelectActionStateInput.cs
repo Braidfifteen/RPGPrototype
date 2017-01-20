@@ -30,11 +30,10 @@ public class SelectActionStateInput : MonoBehaviour, IInput, IEnterable, IExitab
         {
             changeSelectedOption(1);
         }
-
-        // For Testing
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            subState.ChangeGameState(0);
+            selectableOptions[currentOptionIndex].GetComponent<GetCommandFromOptionSelect>().SetSelected(true);
+            subState.ChangeState(2);
         }
     }
 

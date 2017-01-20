@@ -9,7 +9,7 @@ public class CharactersInBattleState : MonoBehaviour, IEnterable, IExitable
 
     public void OnEnter()
     {
-        setupEnemySpots();
+        //setupEnemySpots();
     }
 
     public void OnExit()
@@ -30,5 +30,11 @@ public class CharactersInBattleState : MonoBehaviour, IEnterable, IExitable
 
             enemySpots[i].Set(enemySprite, enemyInfo);
         }
+
+    }
+
+    public void SetupEnemySpots()
+    {
+        setupEnemySpots();
     }
 }

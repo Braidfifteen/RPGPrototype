@@ -3,16 +3,16 @@
 // This is just for moving the arrow. Should change class name.
 public class ActivateSpot : MonoBehaviour, IExitable
 {
-    public GameObject selectorArrow;
+    public GameObject selectable;
 
     public void Activate()
     {
-        selectorArrow.SetActive(true);
+        selectable.SetActive(true);
     }
 
     public void Deactivate()
     {
-        selectorArrow.SetActive(false);
+        selectable.SetActive(false);
     }
 
     public void OnExit()
