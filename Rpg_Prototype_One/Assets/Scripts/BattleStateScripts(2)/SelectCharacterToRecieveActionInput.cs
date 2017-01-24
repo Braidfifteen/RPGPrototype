@@ -5,6 +5,7 @@ using System;
 public class SelectCharacterToRecieveActionInput : MonoBehaviour, IInput, IEnterable, IExitable
 {
     public AllActiveBattleSpotsScript activeBattleSpots;
+    public PlayerSelectionsContainer playerSelections;
 
     private int currentIndex;
 
@@ -14,8 +15,10 @@ public class SelectCharacterToRecieveActionInput : MonoBehaviour, IInput, IEnter
 
     public void OnEnter()
     {
-        currentIndex = 0;
-        previousIndex = 0;
+        currentIndex = activeBattleSpots.EnemyMiddleSpotIndex;
+        activeBattleSpots.PlayerPartyOneSpot.GetComponent<ActivateCharacterSpotArrow>().DeactivateArrow();
+        activeBattleSpots.AllActiveSpots[currentIndex].GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
+
     }
 
     public void OnExit()
@@ -30,6 +33,9 @@ public class SelectCharacterToRecieveActionInput : MonoBehaviour, IInput, IEnter
             moveCharacterSpotSelectorArrow(-1);
         if (Input.GetKeyDown(KeyCode.UpArrow))
             moveCharacterSpotSelectorArrow(1);
+        if (Input.GetKeyDown(KeyCode.Return))
+            addSelectedCharacterToSelectionsList();
+
     }
 
     // 1 is down. -1 is up
@@ -70,5 +76,10 @@ public class SelectCharacterToRecieveActionInput : MonoBehaviour, IInput, IEnter
         activeBattleSpots.AllActiveSpots[currentIndex].GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
 
         previousIndex = currentIndex;
+    }
+
+    private void addSelectedCharacterToSelectionsList()
+    {
+        playerSelections.AddTargetCharacter(activeBattleSpots.AllActiveSpots[currentIndex]);
     }
 }
