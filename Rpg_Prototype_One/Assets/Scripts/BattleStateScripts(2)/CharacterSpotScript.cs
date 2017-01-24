@@ -1,18 +1,13 @@
 ﻿using UnityEngine;
 
-public class CharacterSpot : MonoBehaviour, ISelectable
+public class CharacterSpotScript : MonoBehaviour, ISelectable
 {
     public CharacterInfo characterInfo;
     public SpriteRenderer spriteRenderer;
+    public CharacterBattleSpotActivateDeactivateGameObject activateDeactivateGameObject;
 
     private bool isSelected = false;
     private bool isEmpty = true;
-
-
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
 
     public bool IsEmpty { get { return isEmpty; } }
 
@@ -21,14 +16,14 @@ public class CharacterSpot : MonoBehaviour, ISelectable
         spriteRenderer.sprite = null;
         characterInfo = null;
         isEmpty = true;
-        transform.gameObject.SetActive(false);
+        activateDeactivateGameObject.DeactivateBattleSpotGameObject();
     }
 
     public void Set(Sprite s, CharacterInfo info)
     {
         spriteRenderer.sprite = s;
         characterInfo = info;
-        transform.gameObject.SetActive(true);
+        activateDeactivateGameObject.ActivateBattleSpotGameObject();
     }
 
     public void OnSelect()

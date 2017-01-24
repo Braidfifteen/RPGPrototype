@@ -16,6 +16,7 @@ public class StateParentScript : MonoBehaviour, IState
     private IExitable[] exitObjects;
     private IEnterable[] enterObjects;
     private ILateEnter[] lateEnterObjects;
+    private IEarlyEnter[] earlyEnterObjects;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class StateParentScript : MonoBehaviour, IState
         exitObjects = GetComponentsInChildren<IExitable>();
         enterObjects = GetComponentsInChildren<IEnterable>();
         lateEnterObjects = GetComponentsInChildren<ILateEnter>();
+        earlyEnterObjects = GetComponentsInChildren<IEarlyEnter>();
     }
 
     public void OnUpdate()
@@ -39,6 +41,9 @@ public class StateParentScript : MonoBehaviour, IState
             if (!transform.gameObject.activeInHierarchy)
                 transform.gameObject.SetActive(true);
         }
+
+        for (int i = 0; i < earlyEnterObjects.Length; i++)
+            earlyEnterObjects[i].OnEarlyEnter();
 
         for (int i = 0; i < enterObjects.Length; i++)
             enterObjects[i].OnEnter();

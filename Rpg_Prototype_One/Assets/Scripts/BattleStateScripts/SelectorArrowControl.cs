@@ -59,7 +59,7 @@ public class SelectorArrowControl : MonoBehaviour, ILateEnter, IExitable, ISelec
 
     public void OnSelect()
     {
-        activeSpots[currentIndex].GetComponent<CharacterSpot>().OnSelect();
+        activeSpots[currentIndex].GetComponent<CharacterSpotScript>().OnSelect();
         activeSpots[currentIndex].GetComponent<GetTargetCharacterFromOptionSelect>().SetSelected(true);
     }
 

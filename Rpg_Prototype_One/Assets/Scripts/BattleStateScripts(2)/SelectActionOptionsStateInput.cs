@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System;
 
-public class SelectActionStateInput : MonoBehaviour, IInput, IEnterable, IExitable
+public class SelectActionOptionsStateInput : MonoBehaviour, IInput, IEnterable, IExitable
 {
     public GameObject[] selectableOptions;
     public SubStateMachine subState;
 
     private int currentOptionIndex = 0;
+
+    // Will use observer pattern instead of keeping track of previous index
     private int previousOptionIndex = 0;
 
     public void OnEnter()

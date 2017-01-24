@@ -5,21 +5,26 @@ using System.Collections.Generic;
 public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable, ILateEnter
 {
     public GameObject[] playerPartySpots;
-    public CharacterSpot[] enemyCharacterSpots;
+    public CharacterSpotScript[] enemyCharacterSpots;
+    public CharacterSpotScript[] playerPartyCharacterSpots;
     public GameObject[] enemyGameObjectSpots;
 
     // This list of enemy prefabs will eventually come from a region class which will have different enemies
     // depending on the region.
     public GameObject[] enemyPrefabs;
+    public GameObject[] playerPartyPrefabs;
 
     private List<GameObject> activeSpots = new List<GameObject>();
 
     // This script is ISubject
     private int currentIndex;
 
+    public List<GameObject> ActiveSpots { get { return activeSpots; } }
+
     public void OnEnter()
     {
         setupEnemySpots();
+        setupPlayerSpots();
     }
     
     public void OnLateEnter()
@@ -48,6 +53,20 @@ public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable, ILateEnter
         }
     }
 
+    private void setupPlayerSpots()
+    {
+        for (int i = 0; i < playerPartySpots.Length; i++)
+        {
+            GameObject player = playerPartyPrefabs[0];
+            Sprite playerSprite = player.GetComponent<SpriteRenderer>().sprite;
+            CharacterInfo playerInfo = player.GetComponent<CharacterInfo>();
+
+            playerPartyCharacterSpots[i].Set(playerSprite, playerInfo);
+        }
+    }
+
+
+    // This is uneeded in this script.
     private void getActiveSpots()
     {
         for (int i = 0; i < playerPartySpots.Length; i++)

@@ -2,7 +2,7 @@
 
 public class CharactersInBattleState : MonoBehaviour, IEnterable, IExitable
 {
-    public CharacterSpot[] enemySpots;
+    public CharacterSpotScript[] enemySpots;
     public GameObject[] enemyPrefabs;
     private GameObject enemy;
     //public GameObject[] playerSpots;
