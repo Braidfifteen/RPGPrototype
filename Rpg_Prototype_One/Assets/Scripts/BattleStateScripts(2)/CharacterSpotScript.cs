@@ -5,6 +5,8 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
     public CharacterInfo characterInfo;
     public SpriteRenderer spriteRenderer;
     public CharacterBattleSpotActivateDeactivateGameObject activateDeactivateGameObject;
+    public int intID;
+    public bool IsPlayerPartySpot;
 
     private bool isSelected = false;
     private bool isEmpty = true;

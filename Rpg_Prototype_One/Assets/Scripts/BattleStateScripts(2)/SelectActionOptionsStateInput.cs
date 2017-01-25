@@ -3,8 +3,10 @@ using System;
 
 public class SelectActionOptionsStateInput : MonoBehaviour, IInput, IEnterable, IExitable
 {
+    public SubStateMachine battleStateManager;
+
+    public AttackingPlayerSelectedCheck attackingPlayerSelectedCheck;
     public GameObject[] selectableOptions;
-    public SubStateMachine subState;
 
     private int currentOptionIndex = 0;
 
@@ -35,8 +37,15 @@ public class SelectActionOptionsStateInput : MonoBehaviour, IInput, IEnterable, 
         if (Input.GetKeyDown(KeyCode.Return))
         {
             selectableOptions[currentOptionIndex].GetComponent<GetCommandFromOptionSelect>().SetSelected(true);
-            subState.ChangeState(2);
+            attackingPlayerSelectedCheck.AttackingPlayerIsSelected = true;
+            battleStateManager.ChangeState(2);
         }
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            attackingPlayerSelectedCheck.AttackingPlayerIsSelected = false;
+            battleStateManager.ChangeState(2);
+        }
+
     }
 
     // -1 up, 1 down

@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
 // This script will be attached to the parent game object of each individual state. It will control the flow of that specific
-// state.
 public class StateParentScript : MonoBehaviour, IState
 {
-    public SubStateMachine battleStateManager;
+    public SubStateMachine subState;
 
     // This is used if needed
     public StateMachine gameStateManager;
 
-    public bool SetActiveOnEnterAndExit = true;
+    public bool ActivateOnEnter = true;
+    public bool DeactivateOnExit = true;
 
     private IUpdatable[] updateObjects;
     private IInput[] inputObjects;
@@ -30,13 +30,19 @@ public class StateParentScript : MonoBehaviour, IState
 
     public void OnUpdate()
     {
+        if (subState == null && gameStateManager == null)
+        {
+            print("STATE PARENT SCRIPT MISSING STATE MANAGER");
+            print(transform.gameObject);
+        }
+
         for (int i = 0; i < updateObjects.Length; i++)
             updateObjects[i].OnUpdate();
     }
 
     public void OnEnter()
     {
-        if (SetActiveOnEnterAndExit)
+        if (ActivateOnEnter)
         {
             if (!transform.gameObject.activeInHierarchy)
                 transform.gameObject.SetActive(true);
@@ -57,7 +63,7 @@ public class StateParentScript : MonoBehaviour, IState
         for (int i = 0; i < exitObjects.Length; i++)
             exitObjects[i].OnExit();
 
-        if (SetActiveOnEnterAndExit)
+        if (DeactivateOnExit)
         {
             if (transform.gameObject.activeInHierarchy)
                 transform.gameObject.SetActive(false);

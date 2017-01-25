@@ -10,6 +10,9 @@ public class SubStateMachine : MonoBehaviour, IState
 {
     public GameObject[] objectsWithState;
     public StateMachine gameStateManager;
+    public SubStateMachine subState;
+    public bool ActivateOnEnter = true;
+    public bool DeactivateOnExit = true;
 
     // I want to get away from the use of strings so I want to change this dictionary at somepoint
     private Dictionary<string, IState> stateDict = new Dictionary<string, IState>();
@@ -43,17 +46,21 @@ public class SubStateMachine : MonoBehaviour, IState
 
     public void OnEnter()
     {
-
-        if (!transform.gameObject.activeInHierarchy)
-            transform.gameObject.SetActive(true);
+        if (ActivateOnEnter)
+        {
+            if (!transform.gameObject.activeInHierarchy)
+                transform.gameObject.SetActive(true);
+        }
         currentState.OnEnter();
     }
 
     public void OnExit()
     {
-        if (transform.gameObject.activeInHierarchy)
-            transform.gameObject.SetActive(false);
-
+        if (DeactivateOnExit)
+        {
+            if (transform.gameObject.activeInHierarchy)
+                transform.gameObject.SetActive(false);
+        }
         currentState = stateDict[objectsWithState[0].GetComponent<IState>().ToString()];
     }
 
