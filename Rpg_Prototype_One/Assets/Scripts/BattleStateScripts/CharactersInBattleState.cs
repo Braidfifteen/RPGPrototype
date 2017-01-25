@@ -28,7 +28,7 @@ public class CharactersInBattleState : MonoBehaviour, IEnterable, IExitable
             Sprite enemySprite = enemy.GetComponent<SpriteRenderer>().sprite;
             CharacterInfo enemyInfo = enemy.GetComponent<CharacterInfo>();
 
-            enemySpots[i].Set(enemySprite, enemyInfo);
+            enemySpots[i].Set(enemySprite, enemyInfo, i);
         }
 
     }

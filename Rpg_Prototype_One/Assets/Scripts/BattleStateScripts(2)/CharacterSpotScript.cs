@@ -5,7 +5,8 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
     public CharacterInfo characterInfo;
     public SpriteRenderer spriteRenderer;
     public CharacterBattleSpotActivateDeactivateGameObject activateDeactivateGameObject;
-    public int intID;
+    public int allSpotsIndex;
+    public int enemyOrPlayerIndex;
     public bool IsPlayerPartySpot;
 
     private bool isSelected = false;
@@ -21,8 +22,9 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
         activateDeactivateGameObject.DeactivateBattleSpotGameObject();
     }
 
-    public void Set(Sprite s, CharacterInfo info)
+    public void Set(Sprite s, CharacterInfo info, int allSpotsIndex)
     {
+        this.allSpotsIndex = allSpotsIndex;
         spriteRenderer.sprite = s;
         characterInfo = info;
         activateDeactivateGameObject.ActivateBattleSpotGameObject();

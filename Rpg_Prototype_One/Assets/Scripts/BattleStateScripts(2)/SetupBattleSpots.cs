@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 // This script will be attached to Battle State Enter gameObject. It inits the character spots for the battle.
-public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable, ILateEnter
+public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable
 {
     public GameObject[] playerPartySpots;
     public CharacterSpotScript[] enemyCharacterSpots;
@@ -26,12 +26,6 @@ public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable, ILateEnter
         setupEnemySpots();
         setupPlayerSpots();
     }
-    
-    public void OnLateEnter()
-    {
-        getActiveSpots();
-        //Notify() -- implemented ISubject
-    }
 
     public void OnExit()
     {
@@ -49,7 +43,7 @@ public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable, ILateEnter
             Sprite enemySprite = enemy.GetComponent<SpriteRenderer>().sprite;
             CharacterInfo enemyInfo = enemy.GetComponent<CharacterInfo>();
 
-            enemyCharacterSpots[i].Set(enemySprite, enemyInfo);
+            enemyCharacterSpots[i].Set(enemySprite, enemyInfo, i);
         }
     }
 
@@ -61,24 +55,7 @@ public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable, ILateEnter
             Sprite playerSprite = player.GetComponent<SpriteRenderer>().sprite;
             CharacterInfo playerInfo = player.GetComponent<CharacterInfo>();
 
-            playerPartyCharacterSpots[i].Set(playerSprite, playerInfo);
-        }
-    }
-
-
-    // This is uneeded in this script.
-    private void getActiveSpots()
-    {
-        for (int i = 0; i < playerPartySpots.Length; i++)
-        {
-            if (playerPartySpots[i].activeInHierarchy)
-                activeSpots.Add(playerPartySpots[i]);
-        }
-
-        for (int i = 0; i < enemyGameObjectSpots.Length; i++)
-        {
-            if (enemyGameObjectSpots[i].activeInHierarchy)
-                activeSpots.Add(enemyGameObjectSpots[i]);
+            playerPartyCharacterSpots[i].Set(playerSprite, playerInfo, i);
         }
     }
 }
