@@ -33,6 +33,14 @@ public class AllActiveBattleSpotsScript : MonoBehaviour
             else
                 allActiveEnemySpots.Remove(theGameObject);
         }
+    }
 
+    public void NotifyOnArrowActivate(GameObject theGameObject)
+    {
+        for (int i = 0; i < allActiveSpots.Count; i++)
+        {
+            if (allActiveSpots[i] != theGameObject)
+                allActiveSpots[i].GetComponent<ActivateCharacterSpotArrow>().DeactivateArrow();
+        }
     }
 }

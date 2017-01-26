@@ -21,14 +21,29 @@ public class SelectCharacterToRecieveActionInput : MonoBehaviour, IInput, IEnter
         if (attackingPlayerSelectedCheck.AttackingPlayerIsSelected)
         {
             currentIndex = 0;
-            activeBattleSpots.PlayerPartyOneSpot.GetComponent<ActivateCharacterSpotArrow>().DeactivateArrow();
+            playerSelections.CommandingCharacter.GetComponent<ActivateCharacterSpotArrow>().DeactivateArrow();
             activeBattleSpots.AllActiveSpots[currentIndex].GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
         }
         else
         {
-            currentIndex = 0;
+            //currentIndex = 0;
+            //if (!activeBattleSpots.AllActivePlayerSpots[currentIndex].GetComponent<ActivateCharacterSpotArrow>().IsArrowActive)
+            //    activeBattleSpots.AllActivePlayerSpots[currentIndex].GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
+            for (int i = 0; i < activeBattleSpots.AllActivePlayerSpots.Count; i++)
+            {
+                if (activeBattleSpots.AllActivePlayerSpots[i] == playerSelections.CommandingCharacter)
+                {
+                    currentIndex = i;
+                    if (!activeBattleSpots.AllActivePlayerSpots[i].GetComponent<ActivateCharacterSpotArrow>().IsArrowActive)
+                        activeBattleSpots.AllActivePlayerSpots[i].GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
+                }
+                else
+                {
+                    if (activeBattleSpots.AllActivePlayerSpots[i].GetComponent<ActivateCharacterSpotArrow>().IsArrowActive)
+                        activeBattleSpots.AllActivePlayerSpots[i].GetComponent<ActivateCharacterSpotArrow>().DeactivateArrow();
+                }
+            }
         }
-
     }
 
     public void OnExit()

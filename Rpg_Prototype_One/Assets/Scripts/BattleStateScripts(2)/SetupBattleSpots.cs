@@ -4,6 +4,7 @@ using System.Collections.Generic;
 // This script will be attached to Battle State Enter gameObject. It inits the character spots for the battle.
 public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable
 {
+    public PlayerSelectionsContainer PlayerSelections;
     public GameObject[] playerPartySpots;
     public CharacterSpotScript[] enemyCharacterSpots;
     public CharacterSpotScript[] playerPartyCharacterSpots;
@@ -25,6 +26,7 @@ public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable
     {
         setupEnemySpots();
         setupPlayerSpots();
+        PlayerSelections.CommandingCharacter.GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
     }
 
     public void OnExit()

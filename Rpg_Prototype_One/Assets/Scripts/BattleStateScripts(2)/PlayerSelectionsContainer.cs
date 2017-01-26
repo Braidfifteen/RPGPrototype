@@ -2,26 +2,26 @@
 
 public class PlayerSelectionsContainer : MonoBehaviour
 {
-    public GameObject playerCommand;
-    public GameObject commandingCharacter;
-    public GameObject targetCharacter;
+    public GameObject PlayerCommand;
+    public GameObject CommandingCharacter;
+    public GameObject TargetCharacter;
 
     private ICommand command;
 
     public void AddCommand(GameObject command)
     {
-        playerCommand = command;
-        this.command = playerCommand.GetComponent<ICommand>();
+        PlayerCommand = command;
+        this.command = PlayerCommand.GetComponent<ICommand>();
     }
 
     public void AddCommandingCharacter(GameObject character)
     {
-        commandingCharacter = character;
+        CommandingCharacter = character;
     }
 
     public void AddTargetCharacter(GameObject targCharacter)
     {
-        targetCharacter = targCharacter;
-        command.Execute(commandingCharacter, targetCharacter);
+        TargetCharacter = targCharacter;
+        command.Execute(CommandingCharacter, TargetCharacter);
     }
 }

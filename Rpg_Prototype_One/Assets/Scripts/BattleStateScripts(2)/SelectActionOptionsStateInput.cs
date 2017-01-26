@@ -4,6 +4,7 @@ using System;
 public class SelectActionOptionsStateInput : MonoBehaviour, IInput, IEnterable, IExitable
 {
     public SubStateMachine battleStateManager;
+    public PlayerSelectionsContainer playerSelections;
 
     public AttackingPlayerSelectedCheck attackingPlayerSelectedCheck;
     public GameObject[] selectableOptions;
@@ -16,6 +17,8 @@ public class SelectActionOptionsStateInput : MonoBehaviour, IInput, IEnterable, 
     public void OnEnter()
     {
         selectableOptions[0].SetActive(true);
+        if (!playerSelections.CommandingCharacter.GetComponent<ActivateCharacterSpotArrow>().IsArrowActive)
+            playerSelections.CommandingCharacter.GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
     }
 
     public void OnExit()
