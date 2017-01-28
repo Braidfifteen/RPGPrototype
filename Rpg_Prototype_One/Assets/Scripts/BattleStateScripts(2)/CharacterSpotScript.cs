@@ -27,6 +27,7 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
         this.allSpotsIndex = allSpotsIndex;
         spriteRenderer.sprite = s;
         characterInfo = info;
+        characterInfo.SetCurrentSpot(this);
         activateDeactivateGameObject.ActivateBattleSpotGameObject();
     }
 

@@ -8,6 +8,11 @@ public class PlayerSelectionsContainer : MonoBehaviour
 
     private ICommand command;
 
+    public ICommand GetCommand()
+    {
+        return command;
+    }
+
     public void AddCommand(GameObject command)
     {
         PlayerCommand = command;
@@ -22,6 +27,5 @@ public class PlayerSelectionsContainer : MonoBehaviour
     public void AddTargetCharacter(GameObject targCharacter)
     {
         TargetCharacter = targCharacter;
-        command.Execute(CommandingCharacter, TargetCharacter);
     }
 }

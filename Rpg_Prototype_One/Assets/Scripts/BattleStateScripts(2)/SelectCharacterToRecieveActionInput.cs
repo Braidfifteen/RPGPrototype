@@ -63,7 +63,11 @@ public class SelectCharacterToRecieveActionInput : MonoBehaviour, IInput, IEnter
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (attackingPlayerSelectedCheck.AttackingPlayerIsSelected)
+            {
                 addEnemyToRecieveActionToSelectionsList();
+                battleStateManager.ChangeState(3);
+            }
+
             else
             {
                 addCommandingCharacterToSelectionsList();
