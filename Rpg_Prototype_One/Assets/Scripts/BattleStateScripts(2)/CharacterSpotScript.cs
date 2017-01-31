@@ -31,6 +31,21 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
         activateDeactivateGameObject.ActivateBattleSpotGameObject();
     }
 
+    public void Set(GameObject obj, int allSpotsIndex)
+    {
+        Instantiate(obj);
+        obj.transform.position = transform.position;
+        obj.transform.rotation = transform.rotation;
+
+        obj.transform.localScale = new Vector3(2.0f, 2.0f, 0.0f);
+        this.allSpotsIndex = allSpotsIndex;
+        spriteRenderer.sprite = obj.GetComponent<SpriteRenderer>().sprite;
+        characterInfo = obj.GetComponent<CharacterInfo>();
+        characterInfo.SetCurrentSpot(this);
+        activateDeactivateGameObject.ActivateBattleSpotGameObject();
+        
+    }
+
     public void OnSelect()
     {
         isSelected = true;
