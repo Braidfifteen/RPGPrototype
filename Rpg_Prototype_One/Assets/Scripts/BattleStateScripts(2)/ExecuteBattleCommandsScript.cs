@@ -4,6 +4,7 @@ public class ExecuteBattleCommandsScript : MonoBehaviour, IEnterable
 {
     public StateParentScript stateManager;
     public PlayerSelectionsContainer BattleCommands;
+    public AllActiveBattleSpotsScript ActiveSpots;
 
     private ICommand command;
     private GameObject commandingCharacter;
@@ -17,6 +18,9 @@ public class ExecuteBattleCommandsScript : MonoBehaviour, IEnterable
 
         command.Execute(commandingCharacter, targetCharacter);
 
-        stateManager.subState.ChangeState(1);
+        if (ActiveSpots.AllActiveEnemySpots.Count > 0)
+            stateManager.subState.ChangeState(1);
+        else
+            stateManager.subState.ChangeState(4);
     }
 }
