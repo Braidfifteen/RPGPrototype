@@ -6,7 +6,7 @@ public class WizardCharacter : CharacterInfo
     public WizardCharacter()
     {
         health = 100;
-        damageAmount = 50;
+        damageAmount = 10;
         characterName = "Wizard Character";
     }
 }

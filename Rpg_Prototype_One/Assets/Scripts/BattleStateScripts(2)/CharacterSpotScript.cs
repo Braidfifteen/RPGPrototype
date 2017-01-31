@@ -9,6 +9,8 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
     public int enemyOrPlayerIndex;
     public bool IsPlayerPartySpot;
 
+    public GameObject characterPrefab;
+
     private bool isSelected = false;
     private bool isEmpty = true;
 
@@ -19,6 +21,7 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
         spriteRenderer.sprite = null;
         characterInfo = null;
         isEmpty = true;
+        //characterPrefab.GetComponent<DestroyGameObject>().Destroy();
         activateDeactivateGameObject.DeactivateBattleSpotGameObject();
     }
 
@@ -33,15 +36,16 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
 
     public void Set(GameObject obj, int allSpotsIndex)
     {
-        Instantiate(obj);
-        obj.transform.position = transform.position;
-        obj.transform.rotation = transform.rotation;
-
-        obj.transform.localScale = new Vector3(2.0f, 2.0f, 0.0f);
+        characterPrefab = Instantiate(obj);
+        characterPrefab.transform.position = transform.position;
+        characterPrefab.transform.rotation = transform.rotation;
+        characterPrefab.transform.parent = transform;
+        characterPrefab.SetActive(true);
+        
         this.allSpotsIndex = allSpotsIndex;
-        spriteRenderer.sprite = obj.GetComponent<SpriteRenderer>().sprite;
-        characterInfo = obj.GetComponent<CharacterInfo>();
+        characterInfo = characterPrefab.GetComponent<CharacterInfo>();
         characterInfo.SetCurrentSpot(this);
+        activateDeactivateGameObject.SetDestroyObjectObserver(characterPrefab.GetComponent<DestroyGameObject>());
         activateDeactivateGameObject.ActivateBattleSpotGameObject();
         
     }
