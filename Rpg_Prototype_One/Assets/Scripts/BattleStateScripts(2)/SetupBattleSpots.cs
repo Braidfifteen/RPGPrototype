@@ -41,11 +41,7 @@ public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable
     {
         for (int i = 0; i < Random.Range(1, enemyCharacterSpots.Length + 1); i++)
         {
-            //GameObject enemy = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-            //Sprite enemySprite = enemy.GetComponent<SpriteRenderer>().sprite;
-            //CharacterInfo enemyInfo = enemy.GetComponent<CharacterInfo>();
             enemyCharacterSpots[i].Set(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], i);
-            //enemyCharacterSpots[i].Set(enemySprite, enemyInfo, i);
         }
     }
 
@@ -53,11 +49,7 @@ public class SetupBattleSpots : MonoBehaviour, IEnterable, IExitable
     {
         for (int i = 0; i < playerPartySpots.Length; i++)
         {
-            //GameObject player = playerPartyPrefabs[0];
-            //Sprite playerSprite = player.GetComponent<SpriteRenderer>().sprite;
-            //CharacterInfo playerInfo = player.GetComponent<CharacterInfo>();
             playerPartyCharacterSpots[i].Set(playerPartyPrefabs[0], i);
-           // playerPartyCharacterSpots[i].Set(playerSprite, playerInfo, i);
         }
     }
 }

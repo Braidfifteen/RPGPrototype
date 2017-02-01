@@ -3,6 +3,7 @@
 public class TimedEnter : MonoBehaviour, IUpdatable
 {
     public SubStateMachine battleStateManager;
+    public TurnManager turnManager;
 
     private float counter = 0.0f;
     private float stateDuration = 3.0f;
@@ -14,7 +15,10 @@ public class TimedEnter : MonoBehaviour, IUpdatable
         if (counter >= stateDuration)
         {
             counter = 0.0f;
-            battleStateManager.ChangeState(1);
+            if (turnManager.IsPlayerTurn)
+                battleStateManager.ChangeState(1);
+            else
+                battleStateManager.ChangeState(5);
         }
     }
 }

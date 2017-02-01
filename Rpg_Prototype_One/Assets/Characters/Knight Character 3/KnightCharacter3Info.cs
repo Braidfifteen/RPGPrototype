@@ -7,5 +7,6 @@ public class KnightCharacter3Info : CharacterInfo
     {
         health = 100;
         characterName = "Knight Character 3";
+        damageAmount = 50;
     }
 }

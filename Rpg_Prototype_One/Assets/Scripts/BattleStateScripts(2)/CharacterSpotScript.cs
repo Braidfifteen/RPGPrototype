@@ -21,17 +21,7 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
         spriteRenderer.sprite = null;
         characterInfo = null;
         isEmpty = true;
-        //characterPrefab.GetComponent<DestroyGameObject>().Destroy();
         activateDeactivateGameObject.DeactivateBattleSpotGameObject();
-    }
-
-    public void Set(Sprite s, CharacterInfo info, int allSpotsIndex)
-    {
-        this.allSpotsIndex = allSpotsIndex;
-        spriteRenderer.sprite = s;
-        characterInfo = info;
-        characterInfo.SetCurrentSpot(this);
-        activateDeactivateGameObject.ActivateBattleSpotGameObject();
     }
 
     public void Set(GameObject obj, int allSpotsIndex)
