@@ -23,6 +23,7 @@ public class SelectCharacterToRecieveActionInput : MonoBehaviour, IInput, IEnter
             currentIndex = 0;
             playerSelections.CommandingCharacter.GetComponent<ActivateCharacterSpotArrow>().DeactivateArrow();
             activeBattleSpots.AllActiveSpots[currentIndex].GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
+            addPlayerCommandingCharacterToSelectionsList();
         }
         else
         {
@@ -70,7 +71,7 @@ public class SelectCharacterToRecieveActionInput : MonoBehaviour, IInput, IEnter
 
             else
             {
-                addCommandingCharacterToSelectionsList();
+                addPlayerCommandingCharacterToSelectionsList();
                 battleStateManager.ChangeState(1);
             }
         }
@@ -150,7 +151,7 @@ public class SelectCharacterToRecieveActionInput : MonoBehaviour, IInput, IEnter
         playerSelections.AddTargetCharacter(activeBattleSpots.AllActiveSpots[currentIndex]);
     }
 
-    private void addCommandingCharacterToSelectionsList()
+    private void addPlayerCommandingCharacterToSelectionsList()
     {
         playerSelections.AddCommandingCharacter(activeBattleSpots.AllActivePlayerSpots[currentIndex]);
     }

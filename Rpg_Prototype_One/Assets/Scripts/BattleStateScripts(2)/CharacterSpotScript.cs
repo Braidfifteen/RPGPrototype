@@ -9,9 +9,10 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
     public int enemyOrPlayerIndex;
     public bool IsPlayerPartySpot;
 
+    public GainedItemsAndXP itemsAndXP;
     public GameObject characterPrefab;
 
-    private bool isSelected = false;
+   // private bool isSelected = false;
     private bool isEmpty = true;
 
     public bool IsEmpty { get { return isEmpty; } }
@@ -40,9 +41,16 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
         
     }
 
+    public void CharacterDied()
+    {
+        if (itemsAndXP != null)
+            itemsAndXP.AddXP(characterInfo.XPReturn());
+        activateDeactivateGameObject.DeactivateBattleSpotGameObject();
+    }
+
     public void OnSelect()
     {
-        isSelected = true;
+       // isSelected = true;
         print(characterInfo.GetName());
     }
 

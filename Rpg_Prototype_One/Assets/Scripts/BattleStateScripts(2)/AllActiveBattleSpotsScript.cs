@@ -31,7 +31,10 @@ public class AllActiveBattleSpotsScript : MonoBehaviour
             if (theGameObject.GetComponent<CharacterSpotScript>().IsPlayerPartySpot)
                 allActivePlayerSpots.Remove(theGameObject);
             else
+            {
                 allActiveEnemySpots.Remove(theGameObject);
+            }
+
         }
     }
 

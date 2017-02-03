@@ -6,6 +6,7 @@ public abstract class CharacterInfo : MonoBehaviour
     protected string characterName;
     protected int damageAmount = 10;
     protected CharacterSpotScript currentSpot;
+    protected int xpReturn = 3000;
 
     public void SetCurrentSpot(CharacterSpotScript spot)
     {
@@ -38,9 +39,14 @@ public abstract class CharacterInfo : MonoBehaviour
         checkIfDead();
     }
 
+    public virtual int XPReturn()
+    {
+        return xpReturn;
+    }
+
     private void checkIfDead()
     {
         if (health <= 0)
-            currentSpot.activateDeactivateGameObject.DeactivateBattleSpotGameObject();
+            currentSpot.CharacterDied();
     }
 }

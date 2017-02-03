@@ -17,13 +17,15 @@ public class AIDecideStateManager : MonoBehaviour, IEnterable, IUpdatable
 
     public void OnUpdate()
     {
-        counter += Time.deltaTime;
-        print(counter);
-        if (counter >= 4)
-        {
-            print("Enemy attacking");
-            stateParent.subState.ChangeState(3);
-            counter = 0.0f;
-        }
+        print("Enemy Attacking");
+        stateParent.subState.ChangeState(3);
+        //counter += Time.deltaTime;
+        //print(counter);
+        //if (counter >= 4)
+        //{
+        //    print("Enemy attacking");
+        //    stateParent.subState.ChangeState(3);
+        //    counter = 0.0f;
+        //}
     }
 }
