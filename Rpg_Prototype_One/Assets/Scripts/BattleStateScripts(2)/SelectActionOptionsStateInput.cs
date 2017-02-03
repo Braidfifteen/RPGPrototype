@@ -5,6 +5,7 @@ public class SelectActionOptionsStateInput : MonoBehaviour, IInput, IEnterable, 
 {
     public SubStateMachine battleStateManager;
     public PlayerSelectionsContainer playerSelections;
+    public AllActiveBattleSpotsScript activeBattleSpots;
 
     public AttackingPlayerSelectedCheck attackingPlayerSelectedCheck;
     public GameObject[] selectableOptions;
@@ -17,8 +18,12 @@ public class SelectActionOptionsStateInput : MonoBehaviour, IInput, IEnterable, 
     public void OnEnter()
     {
         selectableOptions[0].SetActive(true);
-        if (!playerSelections.CommandingCharacter.GetComponent<ActivateCharacterSpotArrow>().IsArrowActive)
-            playerSelections.CommandingCharacter.GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
+        //if (!playerSelections.CommandingCharacter.GetComponent<ActivateCharacterSpotArrow>().IsArrowActive)
+        //    playerSelections.CommandingCharacter.GetComponent<ActivateCharacterSpotArrow>().ActivateArrow();
+        ActivateCharacterSpotArrow playerArrow = activeBattleSpots.PlayerPartyOneSpot.GetComponent<ActivateCharacterSpotArrow>();
+
+        if (!playerArrow.IsArrowActive)
+            playerArrow.ActivateArrow();
     }
 
     public void OnExit()
