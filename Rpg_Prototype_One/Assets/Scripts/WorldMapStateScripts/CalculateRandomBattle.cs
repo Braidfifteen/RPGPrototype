@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CalculateRandomBattle : MonoBehaviour
+public class CalculateRandomBattle
 {
     // Reference is to see when this script should be updating.
     // I would like to find a way to decouple this relationship.
@@ -20,7 +20,7 @@ public class CalculateRandomBattle : MonoBehaviour
 
     public bool calculateIfRandomBattle()
     {
-        if((timeForBattle() && Random.Range(0, randNum) == battleNumber &&                  playerMovement.IsMoving))
+        if((timeForBattle() && Random.Range(0, randNum) == battleNumber &&  playerMovement.IsMoving))
         {
             battleTimer = 0.0f;
             return true;
