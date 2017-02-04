@@ -7,6 +7,7 @@ public abstract class CharacterInfo : MonoBehaviour
     protected int damageAmount = 10;
     protected CharacterSpotScript currentSpot;
     protected int xpReturn = 3000;
+    protected int lastTakenDamageAmount;
 
     public void SetCurrentSpot(CharacterSpotScript spot)
     {
@@ -32,11 +33,22 @@ public abstract class CharacterInfo : MonoBehaviour
 
     public void Damage(int amount)
     {
+        lastTakenDamageAmount = amount;
         health -= amount;
         print(characterName);
         print("Damaged!");
         print(health);
         checkIfDead();
+    }
+
+    public int GetLastTakenDamageAmount()
+    {
+        return lastTakenDamageAmount;
+    }
+
+    public Vector3 GetCurrentSpotLocation()
+    {
+        return currentSpot.GetSpotVector3();
     }
 
     public virtual int XPReturn()

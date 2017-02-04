@@ -41,6 +41,11 @@ public class CharacterSpotScript : MonoBehaviour, ISelectable
         
     }
 
+    public Vector3 GetSpotVector3()
+    {
+        return transform.position;
+    }
+
     public void CharacterDied()
     {
         if (itemsAndXP != null)
